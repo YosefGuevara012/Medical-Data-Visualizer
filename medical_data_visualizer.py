@@ -25,7 +25,7 @@ def draw_cat_plot():
     df_cat = df_cat.groupby(['cardio', 'variable', 'value']).size().reset_index(name = "total")
 
     # Draw the catplot with 'sns.catplot()'
-    fig = sns.catplot(x = "variable", y = "total", col = "cardio", hue = "variable", kind = "bar", data = df_cat).fig
+    fig = sns.catplot(x = "variable", y = "total", col = "cardio", hue = "value", kind = "bar", data = df_cat).fig
 
     # Do not modify the next two lines
     fig.savefig('catplot.png')
