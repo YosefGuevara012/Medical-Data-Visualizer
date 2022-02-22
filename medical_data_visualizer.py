@@ -25,9 +25,7 @@ def draw_cat_plot():
     df_cat = df_cat.groupby(['cardio', 'variable', 'value']).size().reset_index(name = "total")
 
     # Draw the catplot with 'sns.catplot()'
-    cat_plot = sns.catplot(x = "variable", y = "total", col = "cardio", hue = "variable", kind = "bar", data = df_cat)
-    fig = cat_plot.get_figure()
-
+    fig = sns.catplot(x = "variable", y = "total", col = "cardio", hue = "variable", kind = "bar", data = df_cat)
 
     # Do not modify the next two lines
     fig.savefig('catplot.png')
@@ -44,17 +42,18 @@ def draw_heat_map():
                 & (df['weight'] >= df['weight'].quantile(0.975))]
 
     # Calculate the correlation matrix
-    corr = None
+    corr = df_heat.corr()
 
     # Generate a mask for the upper triangle
-    mask = None
+    mask = np.zeros_like(corr)
 
 
 
     # Set up the matplotlib figure
-    fig, ax = None
+    fig, ax = plt.subplots(figsize=(16, 8))
 
     # Draw the heatmap with 'sns.heatmap()'
+    ax = sns.heatmap(corr, mask=mask, vmax=.3, square=True, annot=True, fmt = ".1f")
 
 
 
